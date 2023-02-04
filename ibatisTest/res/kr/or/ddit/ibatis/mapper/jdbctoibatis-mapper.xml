@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 이 문서는 iBatis에서 처리할 SQL문을 작성하는 문서입니다. -->
+
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="jdbc">
+	<select id="getMaxId" resultClass="int">
+		SELECT NVL(MAX(LPROD_ID), 0) FROM LPROD
+	</select>
+	
+	<select id="checkLprod" parameterClass="String" resultClass="lprodVo">
+		SELECT * FROM LPROD WHERE LPROD_GU = #lprod_gu#
+	</select>
+	
+	<insert id="insertLprod" parameterClass="lprodVo">
+		INSERT INTO LPROD (LPROD_ID, LPROD_GU, LPROD_NM)
+			VALUES (#lprod_id#, #lprod_gu#, #lprod_nm#)
+	</insert>
+</sqlMap>
